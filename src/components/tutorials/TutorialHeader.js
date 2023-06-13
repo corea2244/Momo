@@ -6,10 +6,11 @@ import {
     setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
-import RightBlackButtonImg from '../../assets/images/TutorialHeaderRightBlackButton.png';
-import LeftBlackButtonImg from '../../assets/images/TutorialHeaderLeftBlackButton.png';
-import RightWhiteButtonImg from '../../assets/images/TutorialHeaderRightWhiteButton.png';
-import LeftWhiteButtonImg from '../../assets/images/TutorialHeaderLeftWhiteButton.png';
+import RightDarkIcon from '../../assets/icons/light/right_arrow.svg';
+import RightLightIcon from '../../assets/images/right_arrow.svg';
+import LeftDarkIcon from '../../assets/icons/dark/backIcon.svg';
+import LeftLightIcon from '../../assets/icons/light/backIcon.svg';
+import { PretendardedText } from '../CustomComponent/PretendardedText';
 
 export const TutorialHeader = (props) => {
     const dispatch = useDispatch();
@@ -57,11 +58,13 @@ export const TutorialHeader = (props) => {
 
     return (
     <View style={{flex: 1, margin:15, flexDirection:"row", justifyContent:"space-between"}}>
-        <TouchableOpacity onPress={clickLeftButton} style={{opacity:enableHeaderLeftBtn ? 1 : 0}} disabled={!enableHeaderLeftBtn}>
-            <Image source={enableBackgroundImg ? LeftWhiteButtonImg : LeftBlackButtonImg} />
+        <TouchableOpacity onPress={clickLeftButton} style={{opacity:enableHeaderLeftBtn ? 1 : 0, flexDirection:'row', alignItems:'center'}} disabled={!enableHeaderLeftBtn}>
+            {enableBackgroundImg ? <LeftDarkIcon/> : <LeftLightIcon/> }
+            <PretendardedText style={{color: enableBackgroundImg ? 'white' : 'black', marginLeft: 4}}>이전으로</PretendardedText>
         </TouchableOpacity>
-        <TouchableOpacity onPress={clickRightButton} style={{opacity:enableHeaderRightBtn ? 1 : 0}} disabled={!enableHeaderRightBtn}>
-            <Image source={enableBackgroundImg ? RightWhiteButtonImg : RightBlackButtonImg} />
+        <TouchableOpacity onPress={clickRightButton} style={{opacity:enableHeaderRightBtn ? 1 : 0, flexDirection:'row', alignItems:'center'}} disabled={!enableHeaderRightBtn}>
+            <PretendardedText style={{color: enableBackgroundImg ? 'white' : 'black', marginRight: 4}}>다음으로</PretendardedText>
+            {enableBackgroundImg ? <RightDarkIcon/> : <RightLightIcon/> }
         </TouchableOpacity>
     </View>
     )
