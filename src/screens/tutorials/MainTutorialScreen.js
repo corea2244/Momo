@@ -32,7 +32,6 @@ export const MainTutorialScreen = () => {
     const clickedRoutineList = useSelector((state) => state.routineSlice.clickedRoutineList);
     const isValidTime = useSelector((state) => state.tutorial.isValidTime);
     const remainingTime = useSelector((state) => state.tutorial.remainingTime);
-    const totalDifficulty = useSelector((state) => state.tutorial.totalDifficulty);
 
     const dispatch = useDispatch();
 
@@ -147,6 +146,8 @@ export const MainTutorialScreen = () => {
     }, [step]);
 
     useEffect(() => {
+        let totalDifficulty = clickedRoutineList.reduce((sum, item) => sum + parseInt(item.difficulty), 0);
+
         if (!isValidTime && step === Step.STEP_TWO) {
             setenableButton(false);
         }
@@ -159,7 +160,7 @@ export const MainTutorialScreen = () => {
         else {
             setenableButton(true);
         }
-    }, [step, isValidTime, clickedRoutineList, totalDifficulty]);
+    }, [step, isValidTime, clickedRoutineList]);
 
     useEffect(() => {
         if (remainingTime < 0) {
